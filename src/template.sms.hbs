@@ -1,0 +1,7 @@
+{{~#with this as |items|~}}
+Example simple message:
+{{#each items}}{{#with this as |record|}}
+a: {{record.structure_property_a}}
+b: {{record.structure_property_b}}
+{{/with}}{{/each}}
+{{~/with~}}

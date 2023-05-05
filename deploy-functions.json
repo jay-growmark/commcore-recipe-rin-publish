@@ -1,0 +1,10 @@
+{
+  "project": "commcore-recipe",
+  "role": "commcore-recipe-role",
+  "functions": [
+    {
+      "name": "commcore-recipe-<...>",
+      "sourceList": [ "out/logic.js" ]
+    }
+  ]
+}

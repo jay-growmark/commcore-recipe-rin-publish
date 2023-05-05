@@ -1,0 +1,26 @@
+version: 0.2
+env:
+  secrets-manager:
+    TOKEN: "GITHUB_PACKAGES:TOKEN"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - npm config set @growmark:registry=https://npm.pkg.github.com/
+      - npm config set //npm.pkg.github.com/:_authToken=$TOKEN
+      - npm install -g @growmark/cloud-utils
+  pre_build:
+    commands:
+      - npm ci
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      - TAG_NUMBER="$(git describe --exact-match $CODEBUILD_SOURCE_VERSION | tr . _)"
+      - echo 'Tag number '$TAG_NUMBER
+      - gcu ulc -c $CODEBUILD_SRC_DIR/deploy-functions.json
+      - gcu cla -c $CODEBUILD_SRC_DIR/deploy-functions.json -a $TAG_NUMBER
+      - gcu clv -c $CODEBUILD_SRC_DIR/deploy-functions.json -d $TAG_NUMBER' version'
+      - gcu ulav -c $CODEBUILD_SRC_DIR/deploy-functions.json -a $TAG_NUMBER

@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "module": "CommonJS",
+      "target": "ES2017",
+      "noImplicitAny": false,
+      "esModuleInterop": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "skipLibCheck": true,
+      "baseUrl": "./",
+      "lib": [ "ES2021" ]
+    },
+    "include": [ "./**/*.ts", "../.shims/**/*.d.ts" ],
+    "exclude": [ "node_modules" ]
+}
